@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cache %}
+<html>
+	<head>
+		<title>{% block title %}MSAC{% endblock %}{% block titleextra %}{% endblock %}</title>
+		{% block extrahead %}{% endblock %}{% cache 500 head %}
+		<link rel="icon" type="image/vnd.microsoft.icon" href="{% static "img/favicon.ico" %}" />
+		<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+		<link href="{% static "css/bootstrap-theme.min.css" %}" rel="stylesheet" media="screen">
+		<link href="{% static "css/extra.css" %}" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+      <!--[if lt IE 9]>
+      	<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+	</head>
+{% endcache %}
+{% block bdyoveride %}
+	<body>
+{% endblock %}
+		{% block topmenu %}
+		{% cache 900 navbar request.user.username %}
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<a class="navbar-brand" href="/"><img src="{% static "img/mac_logo20x20.png" %}" id="logo" alt=""> MSAC</a>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle Navigation</span>
+      					<span class="icon-bar"></span>
+      					<span class="icon-bar"></span>
+      				</a>
+			</div>	
+      			<div class="navbar-collapse collapse navbar-ex1-collapse">
+      				<ul class="nav navbar-nav">
+      					<li id="menu_home"><a href="/"><span class="glyphicon-home glyphicon"></span> Home</a></li>
+      					<li class="dropdown">
+      						<a data-toggle="dropdown" href="#" class="dropdown-toggle"><span class="glyphicon-info-sign glyphicon"></span> About <b class="caret"></b></a>
+      						<ul class="dropdown-menu">
+      							<li id="menu_about"><a href="/about/">The Club</a></li>
+      							<li id="menu_about_logistics"><a href="/about/logistics/">Logistics</a></li>
+      							<li id="menu_about_faq"><a href="/about/faq/">F.A.Q.</a></li>
+							<!--<li id="menu_about_execs"><a href="/about/execs/">The Execs</a></li>-->
+						</ul>
+      					</li> <!--
+      					<li class="dropdown">
+      						<a data-toggle="dropdown" href="#" class="dropdown-toggle"><span class="glyphicon-comment glyphicon"></span> Forums <b class="caret"></b></a>
+      						<ul class="dropdown-menu">
+      							<li id="menu_forum"><a href="/forums/">Browse</a></li>
+      							{% for cat in categories %}
+      							<li class="divider"></li>
+      							<li id="{{cat.menu_id}}"><a href="{{cat.get_absolute_url}}"><b>{{cat.name}}</b></a></li>
+      							<li class="divider"></li>
+      							{% for board in cat.category_set.all %}
+      								{% if user.is_authenticated %}
+		   							{% if board in user.profile.group.allowed_read.all %}
+		   					<li id="{{board.menu_id}}"><a href="{{board.get_absolute_url}}">{{board.name}}</a></li>
+		   							{% endif %}
+								{% else %}
+									{% if board.anon_viewable %}
+							<li id="{{board.menu_id}}"><a href="{{board.get_absolute_url}}">{{board.name}}</a></li>
+									{% endif %}
+								{% endif %}
+      							{% endfor %}
+      							{% endfor %}
+      						</ul>
+      					</li> -->
+      					<li id="menu_blog"><a href='/blog/'><span class="glyphicon-globe glyphicon"></span> Blog</a></li>
+      					<li class="dropdown">
+      						<a data-toggle="dropdown" href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-calendar"></span> Events <b class="caret"></b></a>
+      						<ul class="dropdown-menu">
+      							<li id="menu_events_about"><a href="/events/">About</a></li>
+      							<li id="menu_events_list"><a href="/events/list/">List</a></li>
+      						</ul>
+      					</li>
+      					{% if user.is_authenticated %}
+      					<li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon-user glyphicon"></i> User <b class="caret"></b></a>
+      						<ul class="dropdown-menu">
+      							<li id="menu_profile"><a href='/accounts/profile/'>Profile</a></li>
+      							<li id="menu_new_pass"><a href='/accounts/newpass/'>Change Password</a></li>
+      							{% if user.is_staff %}
+      							<li id="menu_admin"><a href='/admin/'>Admin Panel</a></li>
+      							{% endif %}
+      						</ul>
+      					</li>
+      					<li><a href='/accounts/logout/'><i class="glyphicon-off glyphicon"></i> Logout</a></li>
+      					{% else %}
+      					<li id="menu_login"><a href='/accounts/login/'><span class="glyphicon-user glyphicon"></span> Login</a></li>
+      					<li id="menu_register"><a href='/accounts/register/'><span class="glyphicon-check glyphicon"></span> Register</a></li>
+      					{% endif %}
+      				</ul>
+      			</div>
+		</nav>
+   		{% endcache %}
+		{% endblock %}
+	<div class="container">
+		<div class="row"><div class="col-md-8 col-md-offset-2 pagination-centered">{% block banner %}<a href='/'><img src="{% static "img/MSACbanner.png" %}" alt="Site Banner"/></a>{% endblock %}</div></div>
+		{% if messages %}
+		<div class="row" id="messages">
+			<div class="col-md-8 col-md-offset-2">
+			{% for message in messages %}
+				<div class="alert alert-dismissable {{message.tags}}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					{{message}}
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		{% block body %}
+		<div class="row" id="main-body">
+			<div class="col-md-8 col-md-offset-2">
+			{% block main %}{% endblock main%}
+			</div>
+		</div>
+		{% endblock body %}
+		{% block footer %}<div class="row"><div class="col-md-2 col-md-offset-8"><footer><small>A student group of the SSMU (Students' Society of McGill University)</small></footer></div></div>{% endblock footer %}
+		</div>
+		{% cache 900 scripts %}
+	<!-- Extra stuff, at end to boost page load time -->
+	<script src="{% static "js/jquery.js" %}" ></script>
+	<script src="{% static "js/bootstrap.min.js" %}" ></script>
+	<!--<iframe src="{% static "offline.html" %}" style="position:absolute;top:-999em;visibility:hidden"></iframe>-->
+	{% endcache %}
+	{% block extraScripts %}{% endblock %}
+	</body>
+</html>

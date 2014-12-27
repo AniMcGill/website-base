@@ -1,0 +1,15 @@
+{% extends "base_html.html" %}
+
+{% load static %}
+
+{% block bdyoveride %}
+<body data-spy="scroll" data-target=".ani-sidebar">
+{% endblock %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block body %}{{ flatpage.content|safe }}{% endblock body %}
+
+{% block extraScripts %}
+<script src="{% static "js/bootstrap-scrollspy.js" %}" ></script>
+{% endblock %}

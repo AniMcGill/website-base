@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+	   <link rel="stylesheet" href="{% static "theme.css" %}" />
+		<title>{% block title %}AniMcGill.org{% endblock %}{% block titleextra %}{% endblock %}</title>
+	</head>
+	<body>
+	<iframe src="{% static "offline.html" %}" style="position:absolute;top:-999em;visibility:hidden"></iframe>
+		{% block banner %}<a href='/'><img class="centre" src="{% static "banner.png" %}" alt="Site Banner"/></a><br />{% endblock %}
+		{% block topmenu %}
+			<div id="menu" class="section">	
+			<div class="accordion">
+		   {% if user.is_authenticated %}
+   	      Welcome, {{ user.username }}, to the McGill Students Anime Club<br />
+         {% endif %}
+		
+				<p><a href='/'><h2>Home</h2></a></p>
+				<p><a href='/forums/'><h2>Forums</h2></a></p>
+				<p><a href='/blog/'><h2>Blog</h2></a></p>
+				{% if user.is_authenticated %}
+					<p><a href='/accounts/profile/'><h2>Profile</h2></a></p>
+					<p><a href='/accounts/logout/'><h2>Logout</h2></a></p>
+				{% else %}
+					<p><a href='/accounts/login/'><h2>Login</h2></a></p>
+					<p><a href='/accounts/register/'><h2>Register</h2></a></p>
+				{% endif %}
+				</div>
+			</div>
+			
+		
+		{% endblock %}
+		{% block main %}{% endblock %}
+		{% block footer %}{% endblock %}
+		 
+	</body>
+</html>

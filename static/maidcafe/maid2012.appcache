@@ -1,0 +1,17 @@
+CACHE MANIFEST
+# static cache for old 2012 maid cafe page
+#Revised 17/7/2013
+maid.css
+img/arab_tile.png
+img/biscuits_1.png
+img/biscuits_2.png
+img/cupcake_1.png
+img/cupcake_2.png
+img/fb_event.png
+img/lace.png
+img/maria.png
+img/teacup.png
+img/teapot.png
+
+NETWORK:
+*

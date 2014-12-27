@@ -1,0 +1,61 @@
+{% extends 'base_html.html' %}
+{% load static %}
+{% block extrahead %}
+<meta name="description" content="The McGill Students' Anime Club is a Student Group of the SSMU dedicated to Japanese Pop Culture">
+<link rel="help" href="/about/faq/">
+{% endblock %}
+{% block body %}
+<div class="row" id="main-body">
+	<div class="col-md-2">
+		<div class="well well-sm" id="small-events">
+		<h3 class="text-center">Sponsors</h3>
+			<p><a href="http://www.anicore.biz/" ><img src="{% static "img/Anicore-logo.jpg"%}" alt="Anicore" ></a></p>
+			<p><ul class="list-inline" style="display: flex;justify-content: space-between"><li><a href="https://www.facebook.com/AnicoreDotBiz"><img width=50 src="{% static "img/FB-f-Logo__blue_50.png"%}"></a></li>
+			<li><a href="https://twitter.com/AnicoreDotBiz"><img width=50 src="{% static "img/Twitter_logo_blue.png"%}"></a></li></ul></p>
+		</div>
+		<div class="well well-sm" id="small-events">
+		<h3 class="text-center">Events</h3>
+		{% for item in sub_events %}
+			<p class="text-center"><b><a href="{{item.get_absolute_url}}">{{item.name}}</a></b></p>
+			<p>In: {{item.at|timeuntil}}</p>
+			<hr>
+		{% endfor %}
+		</div>
+	</div>
+	<div class="col-md-8">
+	<br>
+	<div class="well well-lg" id="Events">
+		{% for item in events %}
+		<div class="vevent">
+			<h2 class="text-center"><a href="{{item.get_absolute_url}}" class="summary url">{{item.name}}</a></h2><p class="text-center"> at <time datetime="{{item.at.isoformat}}"><span class="dtstart">{{item.at}}<span class="value-title" title="{{item.at.isoformat}}"></span></span></time></span></p>
+			<div class="description">
+				{{item.get_description|safe}}
+			</div>
+			<dl>
+				<dt>Duration:</dt><dd class="duration">{{item.till|timeuntil:item.at}}</dd>
+				<dt>Location:</dt><dd class="location">{{item.location.ordered|safe}}</dd>
+			</dl>
+			<span class="dtend"><span class="value-title" title="{{item.till.isoformat}}"></span></span>
+		</div>
+		<hr>
+		{% endfor %}
+	</div>
+	</div>
+	<div class="col-md-2">
+		<div class="well well-sm" id="The News">
+		<h3 class="text-center">News</h3>
+{% for item in news %}
+			<p class="text-center"><b><a href="{{item.get_absolute_url}}">{{item.subject}}</a></b> @ {{item.created}} by <a href="{{item.creator.profile.get_absolute_url}}">{{item.creator}}</a></p>
+			<p><a href="{{item.get_absolute_url}}">{{item.reply_count}} Comments</a></p>
+		<hr>
+{% endfor %}
+	</div>
+	</div>
+</div>
+{% endblock %}
+{% block extraScripts %}
+<script>
+var menuItem = document.getElementById("menu_home");
+menuItem.className = "active";
+</script>
+{% endblock %}

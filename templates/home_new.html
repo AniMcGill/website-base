@@ -1,0 +1,18 @@
+{% extends 'base_html.html' %}
+{% load static %}
+{% block main %}
+<table class="FrontPage table">
+{% for item in news %}
+	<tr><th>{{item.subject}} @ {{item.created}} by <a href="{{item.creator.profile.get_absolute_url}}">{{item.creator}}</a></th></tr>
+	<tr><td>{{ item.get_first.text_shown|safe  }}</td></tr>
+	<tr><td><hr /></td></tr>
+{% endfor %}
+</table>
+{% endblock %}
+
+{% block extraScripts %}
+<script>
+var menuItem = document.getElementById("menu_home");
+menuItem.className = "active";
+</script>
+{% endblock %}

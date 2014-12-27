@@ -1,0 +1,30 @@
+CACHE MANIFEST
+# Version 9
+/static/css/extra.css
+/static/img/banner.png
+/static/img/favicon.ico
+/static/img/read_icon.png
+/static/img/unread_icon.png
+/static/js/analytics.js
+/static/js/jquery.js
+
+#Bootstrap JS
+/static/js/bootstrap.min.js
+
+#Bootstrap CSS
+/static/css/bootstrap-theme.min.css
+/static/css/bootstrap.min.css
+
+#Bootstrap images
+/static/img/mac_logo20x20.png
+
+#Bootstrap fonts
+/static/fonts/glyphicons-halflings-regular.svg
+/static/fonts/glyphicons-halflings-regular.ttf
+/static/fonts/glyphicons-halflings-regular.woff
+/static/fonts/glyphicons-halflings-regular.eot
+
+
+
+NETWORK:
+*
