@@ -170,6 +170,9 @@ div.nav-open {
 } 
 
 img.left-img {
+	padding-top: 20px;
+	padding-left: 5px;
+	padding-right: 5px;
 	max-height: 300px;
 }
 
