@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+/usr/bin/gzip -r -9 -k -f static
