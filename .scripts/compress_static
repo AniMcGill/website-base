@@ -1,2 +1,15 @@
 #!/usr/bin/bash
-/usr/bin/gzip -r -9 -k -f static
+CSS_FILES=`find static -name *.css`
+SVG_FILES=`find static -name *.svg`
+HTML_FILES=`find static -name *.html`
+JS_FILES=`find static -name *.js`
+TXT_FILES=`find static -name *.txt`
+APP_CACHE=`find . -name *.appcache`
+echo "Compressing files"
+/usr/bin/gzip -9 -k -f $CSS_FILES $SVG_FILES $HTML_FILES $JS_FILES $TXT_FILES
+if [ "$?" != "0" ]
+then
+	echo "Something went wrong"
+	exit 1
+fi
+echo "Done"
