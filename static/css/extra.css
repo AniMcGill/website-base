@@ -173,6 +173,12 @@ img.left-img {
 	max-height: 300px;
 }
 
-#sponsors figcaption {
+#sponsors figure {
 	text-align: center;
+	padding-bottom: 20px;
+}
+
+#sponsors img {
+	max-width: 80%;
+	max_height: 400px;
 }
