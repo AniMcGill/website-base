@@ -32,8 +32,8 @@
 					<li>
 						<ul class="link-list">
 							<li id="menu_event_updates"><a href="/updates/">Updates</a></li>
-							<li id="menu_event_calendar"><a href="#">Calendar</a></li>
-							<li id="menu_event_maid"><a href="/pages/maid2015/">Maid Cafe</a></li>
+							<!--<li id="menu_event_calendar"><a href="#">Calendar</a></li>
+							<li id="menu_event_maid"><a href="/pages/maid2015/">Maid Cafe</a></li>-->
 						</ul>
 					</li>
 					<li id="About_menu">About Us</li>
@@ -41,7 +41,7 @@
 						<ul class="link-list">
 							<li id="menu_about_club"><a href="/about/">The McGill Students' Anime Club</a></li>
 							<li id="menu_about_faq"><a href="/about/faq/">Frequently Asked Questions</a></li>
-							<li id="menu_about_execs"><a href="#">The Execs</a></li>
+							<li id="menu_about_execs"><a href="/accounts/execs/">The Execs</a></li>
 							<li id="menu_about_sponsors"><a href="/about/sponsors/">Sponsors</a></li>
 						</ul>
 					</li>
@@ -50,6 +50,7 @@
 						<ul class="link-list">
 							{% if user.is_authenticated %}
 							<li id="menu_accounts_profile"><a href="/accounts/profile/">View Profile</a></li>
+							<li id="menu_accounts_logout"><a href="/accounts/logout/">Logout</a></li>
 							{% else %}
 							<li id="menu_accounts_login"><a href="/accounts/login/">Login</a></li>
 							<li id="menu_accounts_register"><a href="/accounts/register/">Register</a></li>

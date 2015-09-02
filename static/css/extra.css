@@ -180,5 +180,9 @@ img.left-img {
 
 #sponsors img {
 	max-width: 80%;
-	max_height: 400px;
+	max-height: 400px;
+}
+
+h3.exec_title {
+	text-align: center;
 }
